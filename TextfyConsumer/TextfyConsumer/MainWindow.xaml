@@ -1,0 +1,28 @@
+﻿<Window x:Class="TextfyConsumer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextfyConsumer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="0,0,521,0">
+        <Image x:Name="ImgBitmapView" HorizontalAlignment="Left" Height="100" Margin="30,100,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="1.886,0.555"/>
+        <Image x:Name="ImgBitmapView2" HorizontalAlignment="Left" Height="100" Margin="30,246,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button Content="Difference" HorizontalAlignment="Left" Margin="34,34,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.42,-0.198" PreviewMouseDown="Button_PreviewMouseDown"/>
+        <TextBox x:Name="ResultTextBox" HorizontalAlignment="Left" Height="23" Margin="10,377,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Load bmp A" HorizontalAlignment="Left" Margin="34,75,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Load bmp B" HorizontalAlignment="Left" Margin="34,221,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Slider x:Name="ThresholdBar" HorizontalAlignment="Left" Margin="77,226,-117,0" VerticalAlignment="Top" Height="28" Width="311" Maximum="255" RenderTransformOrigin="0.5,0.5">
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+
+    </Grid>
+</Window>
