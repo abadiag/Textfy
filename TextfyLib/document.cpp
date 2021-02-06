@@ -167,6 +167,6 @@ Letter* document::get_best_coincidence(Letter* l, std::vector<Letter*> _letters)
 
 	//result->save_image(file_.c_str());
 	//l->save_image(file2_.c_str());
-	cout <<result->text << " "<< r << "%"<<endl;
+	//cout <<result->text << " "<< r << "%"<<endl;
 	return result;
 }

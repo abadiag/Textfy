@@ -13,7 +13,7 @@
         <TextBox x:Name="ResultTextBox" HorizontalAlignment="Left" Height="23" Margin="10,377,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Button Content="Load bmp A" HorizontalAlignment="Left" Margin="34,75,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Button Content="Load bmp B" HorizontalAlignment="Left" Margin="34,221,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-        <Slider x:Name="ThresholdBar" HorizontalAlignment="Left" Margin="77,226,-117,0" VerticalAlignment="Top" Height="28" Width="311" Maximum="255" RenderTransformOrigin="0.5,0.5">
+        <Slider x:Name="ThresholdBar" HorizontalAlignment="Left" Margin="77,226,-117,0" VerticalAlignment="Top" Height="28" Width="311" Maximum="255" RenderTransformOrigin="0.5,0.5" ValueChanged="ThresholdBar_ValueChanged">
             <Slider.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -23,6 +23,9 @@
                 </TransformGroup>
             </Slider.RenderTransform>
         </Slider>
+        <TextBlock x:Name="barValue" HorizontalAlignment="Left" Margin="223,21,0,0" TextWrapping="Wrap" Text="Value" VerticalAlignment="Top" RenderTransformOrigin="-0.655,0.188" Height="48" Width="38"/>
+        <Button Content="Analize text" HorizontalAlignment="Left" Margin="304,34,-108,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
+        <TextBlock x:Name="TextResult_block" HorizontalAlignment="Left" Margin="304,75,-406,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="373" Height="258"/>
 
     </Grid>
 </Window>

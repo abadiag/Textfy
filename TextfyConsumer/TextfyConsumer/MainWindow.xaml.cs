@@ -28,17 +28,21 @@ namespace TextfyConsumer
         private static string a_2 = @"F:\Repository\Textfy\Assets\A2.bmp";
         private static string d_1 = @"F:\Repository\Textfy\Assets\D2.bmp";
         private static string output_path = @"F:\Repository\Textfy\Assets\image_output_bmp.bmp";
-
         private static string text_image = @"F:\Repository\Textfy\Assets\text_image.bmp";
         private static string template_test_font = @"F:\Repository\Textfy\Assets\Fonts\Test\Test.bmp";
 
         private string file_1 = String.Empty;
         private string file_2 = String.Empty;
-
+        private string file_to_analize = String.Empty;
         public MainWindow()
         {
             InitializeComponent();
-            DoProcesses();
+            Task.Run(() => CreateTemplates());
+
+            ThresholdBar.Value = 0.0;
+            var diff = GetDifference(template_test_font, template_test_font, 10);
+
+            Console.WriteLine(diff);
         }
 
         private async void DoProcesses()
@@ -47,10 +51,11 @@ namespace TextfyConsumer
             {
                 await Task.Run(() => CreateTemplates());
                 unsafe
-                {     
-                    ProcessDocument();
+                {
+
                 }
-            }catch(Exception e) 
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -58,24 +63,22 @@ namespace TextfyConsumer
 
         private void CreateTemplates()
         {
-           
-                Api.BitmapApi.create_templates();
-            
+
+            Api.BitmapApi.create_templates();
         }
 
 
-        private void ProcessDocument() 
+        private string ProcessDocument(string path_to_analize)
         {
-           var text_result =  Api.BitmapApi.process_document(text_image); 
-           Console.WriteLine("result is : " + text_result);
+            return Task.Run(()=>Api.BitmapApi.process_document(path_to_analize)).Result;
         }
 
-        private int GetDifference(string img1, string img2, int th) 
+        private int GetDifference(string img1, string img2, int th)
         {
             return Api.BitmapApi.get_coincidence(img1, img2, th);
         }
 
-        private void GetStream() 
+        private void GetStream()
         {
 
             Api.BitmapApi.get_bmp_stream(out var b, out var result);
@@ -91,14 +94,14 @@ namespace TextfyConsumer
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fd = new OpenFileDialog();
-            if (fd.ShowDialog().HasValue) 
+            if (fd.ShowDialog().HasValue)
             {
-                 file_1 = fd.FileName;
-                if (file_1.Contains(".bmp")) 
+                file_1 = fd.FileName;
+                if (file_1.Contains(".bmp"))
                 {
                     ImgBitmapView.Source = new BitmapImage(new Uri(file_1));
                 }
-            
+
             }
         }
 
@@ -114,5 +117,32 @@ namespace TextfyConsumer
                 }
             }
         }
+
+        private void ThresholdBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            barValue.Text = ThresholdBar.Value.ToString();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            if (fd.ShowDialog().HasValue)
+            {
+                file_to_analize = fd.FileName;
+                if (file_to_analize.Contains(".bmp"))
+                {
+                    string txt_result = "No result";
+
+                    txt_result = ProcessDocument(file_to_analize);
+
+                    TextResult_block.Text = txt_result;
+                }
+                else
+                {
+                    MessageBox.Show("File not valid " + file_to_analize);
+                }
+            }
+        }
     }
 }
+

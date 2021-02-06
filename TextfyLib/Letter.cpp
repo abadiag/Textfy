@@ -37,10 +37,10 @@ float Letter::percentCoincidence(CharacterBase& othChar, int threshold)
 
 			rgb_t pixel_a = this->char_bmp.get_pixel(x, y);
 
-			x2 = x * aspect_x_ratio;
-			y2 = y * aspect_y_ratio;
+			x2 = std::floor(x * aspect_x_ratio);
+			y2 = std::floor(y * aspect_y_ratio);
 
-			rgb_t pixel_b = othChar.char_bmp.get_pixel(x, y);
+			rgb_t pixel_b = othChar.char_bmp.get_pixel(x2, y2);
 			pixels_count++;
 			
 			if(diff(pixel_a, pixel_b, threshold))pixEqual++;

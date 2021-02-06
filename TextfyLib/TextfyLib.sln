@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextfyConsumer", "..\Textfy
 		{174D66F4-95A4-4512-956D-DEB71A751428} = {174D66F4-95A4-4512-956D-DEB71A751428}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextfyLibTest", "..\TextfyLibTest\TextfyLibTest.csproj", "{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,18 @@ Global
 		{71A8CAF0-D482-40C4-B206-0B334CD7B2CC}.Release|x64.Build.0 = Release|Any CPU
 		{71A8CAF0-D482-40C4-B206-0B334CD7B2CC}.Release|x86.ActiveCfg = Release|Any CPU
 		{71A8CAF0-D482-40C4-B206-0B334CD7B2CC}.Release|x86.Build.0 = Release|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Debug|x64.Build.0 = Debug|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Debug|x86.Build.0 = Debug|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Release|x64.ActiveCfg = Release|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Release|x64.Build.0 = Release|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Release|x86.ActiveCfg = Release|Any CPU
+		{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

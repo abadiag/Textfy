@@ -1,10 +1,19 @@
-#pragma once
-#ifdef TEXTFYLIB_EXPORTS
-#define TEXTFYLIB_API __declspec(dllexport)
-#else
-#define TEXTFYLIB_API __declspec(dllimport)
-#endif
+# if (defined _WIN32 || defined WINCE || defined __CYGWIN__)
+#   define TEXTFYLIB_API __declspec(dllexport)
+# elif defined __GNUC__ && __GNUC__ >= 4 && defined(__APPLE__)
+#   define TEXTFYLIB_API __attribute__ ((visibility ("default")))
+# endif
+
+#ifdef _MSC_VER
+// ReSharper disable once IdentifierTypo
+#define NOMINMAX
+// ReSharper disable once CppInconsistentNaming
 #define _CRT_SECURE_NO_WARNINGS
+#pragma warning(push)
+#pragma warning(disable: 4251)
+#pragma warning(disable: 4996)
+#endif
+#pragma once
 
 #include <strsafe.h>
 #include <objbase.h>

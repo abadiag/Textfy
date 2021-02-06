@@ -157,11 +157,11 @@ TEXTFYLIB_API SAFEARRAY* get_bmp_array()
 TEXTFYLIB_API int get_coincidence(const char* file_name_a, const char* file_name_b, int threshold)
 {
 	int result = -1;
-	bitmap_image letter_a(file_name_a);
-	bitmap_image letter_b(file_name_b);
+	bitmap_image image1(file_name_a);
+	bitmap_image image2(file_name_b);
 	cout << "Comparing file a: " << file_name_a << " and file b: " << file_name_b << endl;
-	Letter a(letter_a);
-	Letter b(letter_b);
+	Letter a(image1);
+	Letter b(image2);
 	a.contrast_image();
 	b.contrast_image();
 
@@ -175,33 +175,33 @@ TEXTFYLIB_API int get_coincidence(const char* file_name_a, const char* file_name
 
 TEXTFYLIB_API void create_templates()
 {
-	//bitmap_image faunces_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Faunces\\Fraunces.bmp");
-	//document faunces(faunces_bmp);
+	bitmap_image faunces_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Faunces\\Fraunces.bmp");
+	document faunces(faunces_bmp);
 
-	//bitmap_image inconsolata_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\inconsolata.bmp");
-	//document inconsolata(inconsolata_bmp);
+	bitmap_image inconsolata_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\inconsolata.bmp");
+	document inconsolata(inconsolata_bmp);
 
-	//bitmap_image ptserif_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\PTSerif\\PTSerif.bmp");
-	//document ptserif(ptserif_bmp);
+	bitmap_image ptserif_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\PTSerif\\PTSerif.bmp");
+	document ptserif(ptserif_bmp);
 
-	//bitmap_image roboto_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Roboto\\Roboto.bmp");
-	//document roboto(roboto_bmp);
+	bitmap_image roboto_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Roboto\\Roboto.bmp");
+	document roboto(roboto_bmp);
 
 	bitmap_image ubuntu_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Ubuntu\\Ubuntu.bmp");
 	document ubuntu(ubuntu_bmp);
 
 	std::vector<document> docs;
-	//docs.push_back(faunces);
-	//docs.push_back(inconsolata);
-	//docs.push_back(ptserif);
-	//docs.push_back(roboto);
+	docs.push_back(faunces);
+	docs.push_back(inconsolata);
+	docs.push_back(ptserif);
+	docs.push_back(roboto);
 	docs.push_back(ubuntu);
 
 	std::vector <const char*> docs_path;
-	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Faunces\\Fraunces.txt");
-	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\Inconsolata.txt");
-	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\PTSerif\\PTSerif.txt");
-	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Roboto\\Roboto.txt");
+	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Faunces\\Fraunces.txt");
+	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\Inconsolata.txt");
+	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\PTSerif\\PTSerif.txt");
+	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Roboto\\Roboto.txt");
 	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Ubuntu\\Ubuntu.txt");
 
 	templ_factory = new templates_factory(docs, docs_path);

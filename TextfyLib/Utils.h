@@ -139,16 +139,9 @@ static inline bitmap_image crop_to_image_size(bitmap_image image)
 
 static inline bool diff(const rgb_t& c0, const rgb_t& c1, const unsigned char threshold)
 {
-	//bool r_a = (int)c0.red < (int)threshold;
-	//bool g_a = (int)c0.green < (int)threshold;
-	//bool b_a = (int)c0.blue < (int)threshold;
-
-	//bool r_b = (int)c1.red < (int)threshold;
-	//bool g_b = (int)c1.green < (int)threshold;
-	//bool b_b = (int)c1.blue < (int)threshold;
-	bool r_a = (int)c0.red - (int)c1.red < (int)threshold;
-	bool g_a = (int)c0.green- (int)c1.green < (int)threshold;
-	bool b_a = (int)c0.blue-(int)c1.blue < (int)threshold;
+	bool r_a = (int)c0.red - (int)c1.red <= (int)threshold;
+	bool g_a = (int)c0.green- (int)c1.green <= (int)threshold;
+	bool b_a = (int)c0.blue-(int)c1.blue <= (int)threshold;
 	return (r_a  && g_a && b_a);
 }
 
