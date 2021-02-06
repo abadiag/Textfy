@@ -1,10 +1,13 @@
 #pragma once
 #include "bitmap_image.hpp"
 #include <string>
+#include <direct.h>
 #include "Letter.h"
 #include "Utils.h"
 #include "line.h"
 #include "BmpColors.h"
+
+
 
 class document
 {
@@ -13,7 +16,7 @@ public:
 	std::string get_text();
 	void scan_document();
 	vector<Letter*> get_letters();
-	void set_text(vector<Letter*> letters);
+	void set_text(vector<Letter*> letters, int thresH);
 	void set_letters();
 	vector<Letter*>letters;
 
@@ -22,8 +25,9 @@ private:
 	void high_contrast();
 	void h_lines();
 	void extract_lines();
-	Letter* get_best_coincidence(Letter* l, std::vector<Letter*> letters);
-	
+	Letter* get_best_coincidence(Letter* l, std::vector<Letter*> letters, int threshold);
+	void export_result(Letter* origin, Letter* match, float coincidence);
+
 	bitmap_image doc_bitmap;
 	std::vector<line*>lines;
 	int bitmap_with;

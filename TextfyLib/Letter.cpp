@@ -13,29 +13,28 @@ Letter::Letter(Letter & oth):CharacterBase()
 float Letter::percentCoincidence(CharacterBase& othChar, int threshold)
 {
 	float result = 0;
-	int pixEqual = 0;
-	int pixels_count = 0;
+	int pixEqual = 1;
+	int pixels_count = 1;
+	crop_to_letter_size();
 
 	int width = this->char_bmp.width();
 	int height = this->char_bmp.height();
 
+	float proportion = (float)width / (float)height;
+	float proportion_oth = (float)othChar.char_bmp.width() / (float)othChar.char_bmp.height();
+
+	if ((proportion - proportion_oth) > 0.1)return 1;
+
 	bitmap_image resized(width, height);
 	resize(othChar.char_bmp, width, height, &resized);
 
-	//int oth_width = othChar.char_bmp.width();
-	//int oth_height = othChar.char_bmp.height();
-
-	//int _area = width * height;
-	//int _area_other = oth_width * oth_height;
 	for (int x = 0; x < width; x++)
 	{
 		for (int y = 0; y < height; y++)
 		{
-
 			rgb_t pixel_a = this->char_bmp.get_pixel(x, y);
 			rgb_t pixel_b = resized.get_pixel(x, y);
 			pixels_count++;
-			
 			if(diff(pixel_a, pixel_b, threshold))pixEqual++;
 		}
 	}
@@ -82,7 +81,7 @@ void Letter::crop_to_letter_size()
 		}
 	}
 
-	this->char_bmp = b;
+	this->char_bmp.copy_from(b);
 };
 
 int Letter::get_max_value()

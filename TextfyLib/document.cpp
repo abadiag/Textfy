@@ -102,7 +102,7 @@ vector<Letter*> document::get_letters()
 	return this->letters;
 }
 
-void document::set_text(vector<Letter*> _letters)
+void document::set_text(vector<Letter*> _letters, int thresH)
 {
 	string result = "";
 
@@ -116,7 +116,7 @@ void document::set_text(vector<Letter*> _letters)
 				for (int l_count = 0; l_count < line->letters.size(); l_count++)
 				{
 					auto letter_a = line->letters[l_count]; 
-					auto best = get_best_coincidence(letter_a, _letters);
+					auto best = get_best_coincidence(letter_a, _letters, thresH);
 					result += best->text;
 				}
 			}
@@ -138,7 +138,7 @@ int document::get_orientation()
 	return 0;
 }
 
-Letter* document::get_best_coincidence(Letter* l, std::vector<Letter*> _letters)
+Letter* document::get_best_coincidence(Letter* l, std::vector<Letter*> _letters, int threshold)
 {
 	float r = 1;
 	float r_temp = 0.0;
@@ -146,7 +146,7 @@ Letter* document::get_best_coincidence(Letter* l, std::vector<Letter*> _letters)
 
 	for(auto _letter : _letters)
 	{
-		r = l->percentCoincidence(*_letter, 80);
+		r = l->percentCoincidence(*_letter, threshold);
 
 		if (r > r_temp) 
 		{
@@ -155,18 +155,22 @@ Letter* document::get_best_coincidence(Letter* l, std::vector<Letter*> _letters)
 		}
 	}
 
-	//string file_ = "F:\\Repository\\Textfy\\Assets\\Results\\line" + 
-	//				std::to_string(result->line_owner) + "_position"+ 
-	//				std::to_string(result->position_in_line) +
-	//				".bmp";
-
-	//string file2_ = "F:\\Repository\\Textfy\\Assets\\Results\\line" +
-	//	std::to_string(l->line_owner) + "_position" + 
-	//	std::to_string(l->position_in_line) +
-	//	".bmp";
-
-	//result->save_image(file_.c_str());
-	//l->save_image(file2_.c_str());
+	export_result(l, result, r);
 	//cout <<result->text << " "<< r << "%"<<endl;
 	return result;
+}
+
+void document::export_result(Letter *origin, Letter *match, float coincidence)
+{
+	string folder = "F:\\Repository\\Textfy\\Assets\\Results\\line" +
+		std::to_string(origin->line_owner) + "_position" +
+		std::to_string(origin->position_in_line);
+
+#pragma warning(suppress : 4996)
+	mkdir(folder.c_str());
+
+	string file_origin_pth = folder + "\\origin.bmp";
+	string file_match_pth = folder + "\\match.bmp";
+	match->save_image(file_match_pth.c_str());
+	origin->save_image(file_origin_pth.c_str());
 }

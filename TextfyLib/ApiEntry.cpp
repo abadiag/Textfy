@@ -217,7 +217,7 @@ TEXTFYLIB_API char* process_document(const char* file_name)
 	bitmap_image doc_img(file_name);
 	document doc(doc_img);
 	doc.scan_document();
-	doc.set_text(templ_factory->get_templates());
+	doc.set_text(templ_factory->get_templates(), 3);
 	text_result = doc.get_text();
 	cout << "result from library " << "\n" << text_result << endl;
 	return strcpy(new char[text_result.size()], text_result.c_str());

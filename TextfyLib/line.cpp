@@ -70,8 +70,8 @@ void line::extract_columns()
 	{
 		bitmap_image b = get_column_bmp(this->line_bmp, columns[col_num]->x1, columns[col_num]->x2);
 		columns[col_num]->set_column_bmp(b);
-
-		auto letter = new Letter(b);
+		auto b_cropped = crop_to_image_size(b);
+		auto letter = new Letter(b_cropped);
 		letter->position_in_line = col_num;
 		letter->line_owner = this->line_position;
 		letters.push_back(letter);

@@ -139,9 +139,9 @@ static inline bitmap_image crop_to_image_size(bitmap_image image)
 
 static inline bool diff(const rgb_t& c0, const rgb_t& c1, const unsigned char threshold)
 {
-	bool r_a = (int)c0.red - (int)c1.red <= (int)threshold;
-	bool g_a = (int)c0.green - (int)c1.green <= (int)threshold;
-	bool b_a = (int)c0.blue - (int)c1.blue <= (int)threshold;
+	bool r_a = ((int)c0.red - (int)c1.red) <= (int)threshold;
+	bool g_a = ((int)c0.green - (int)c1.green) <= (int)threshold;
+	bool b_a = ((int)c0.blue - (int)c1.blue) <= (int)threshold;
 	return (r_a && g_a && b_a);
 }
 
@@ -270,19 +270,42 @@ static inline int height_from_margins(margins m)
 
 static inline void resize(bitmap_image& _bmp, int w, int h, bitmap_image* result)
 {
-	result->setwidth_height(w, h, true);
 	std::cout << "x in bmp " << std::to_string(_bmp.width()) << "x out " << std::to_string(w) << std::endl;
 	std::cout << "y in bmp " << std::to_string(_bmp.height()) << "y out " << std::to_string(h) << std::endl;
-	float x_aps_ratio = (float)w / (float)_bmp.width() ;
-	float y_aps_ratio = (float)h/ (float)_bmp.height();
+	float bmp_width = (float)_bmp.width();
+	float bmp_height = (float)_bmp.height();
 
-	std::cout << "x aspect ratio "<< std::to_string(x_aps_ratio) << std::endl;
-	for (int x = 0; x < w; x++)
+	try 
 	{
-		for (int y = 0; y < h; y++)
+		if (bmp_width == 0.0 || bmp_height == 0.0 || w == 0.0 || h == 0.0)
 		{
-			auto pix = _bmp.get_pixel(std::floor(x  / x_aps_ratio), std::floor(y / y_aps_ratio));
-			result->set_pixel(x, y, pix);
+			result->copy_from(_bmp);
+			return;
 		}
+		float x_aps_ratio = (float)w / bmp_width;
+		float y_aps_ratio = (float)h / bmp_height;
+		result->setwidth_height(w, h, true);
+
+		if (x_aps_ratio == 0.0 || y_aps_ratio == 0.0)
+		{
+			result->copy_from(_bmp);
+			return;
+		}
+
+		std::cout << "x aspect ratio " << std::to_string(x_aps_ratio) << std::endl;
+		for (int x = 0; x < w; x++)
+		{
+			for (int y = 0; y < h; y++)
+			{
+				auto pix = _bmp.get_pixel(std::floor(x / x_aps_ratio), std::floor(y / y_aps_ratio));
+				result->set_pixel(x, y, pix);
+			}
+		}
+	}
+	catch (std::exception e)
+	{
+		std::cout << e.what() << std::endl;
+		result->copy_from(_bmp);
+		return;
 	}
 };
