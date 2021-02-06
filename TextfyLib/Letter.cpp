@@ -15,32 +15,25 @@ float Letter::percentCoincidence(CharacterBase& othChar, int threshold)
 	float result = 0;
 	int pixEqual = 0;
 	int pixels_count = 0;
-	float aspect_x_ratio = 0.0;
-	float aspect_y_ratio = 0.0;
 
 	int width = this->char_bmp.width();
 	int height = this->char_bmp.height();
 
-	int oth_width = othChar.char_bmp.width();
-	int oth_height = othChar.char_bmp.height();
+	bitmap_image resized(width, height);
+	resize(othChar.char_bmp, width, height, &resized);
 
-	aspect_x_ratio = std::abs(width / oth_width);
-	aspect_y_ratio = std::abs(height / oth_height);
+	//int oth_width = othChar.char_bmp.width();
+	//int oth_height = othChar.char_bmp.height();
 
-	int x2 = 0;
-	int y2 = 0;
-
+	//int _area = width * height;
+	//int _area_other = oth_width * oth_height;
 	for (int x = 0; x < width; x++)
 	{
 		for (int y = 0; y < height; y++)
 		{
 
 			rgb_t pixel_a = this->char_bmp.get_pixel(x, y);
-
-			x2 = std::floor(x * aspect_x_ratio);
-			y2 = std::floor(y * aspect_y_ratio);
-
-			rgb_t pixel_b = othChar.char_bmp.get_pixel(x2, y2);
+			rgb_t pixel_b = resized.get_pixel(x, y);
 			pixels_count++;
 			
 			if(diff(pixel_a, pixel_b, threshold))pixEqual++;

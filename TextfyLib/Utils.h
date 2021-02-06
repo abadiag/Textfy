@@ -25,7 +25,7 @@ static inline int height_from_margins(margins m);
 static inline bool is_white_line(bitmap_image* image, int y);
 static bitmap_image get_column_bmp(bitmap_image image, int x1, int x2);
 static bitmap_image get_row_bmp(bitmap_image image, int y1, int y2);
-static inline bitmap_image resize(bitmap_image& _bmp, int w, int h);
+//static inline bitmap_image resize(bitmap_image& _bmp, int w, int h, bitmap_image* result);
 
 static inline void high_contrast_apply(bitmap_image* bmp)
 {
@@ -45,12 +45,12 @@ static inline void high_contrast_apply(bitmap_image* bmp)
 
 static inline bool is_white_line(bitmap_image* image, int y)
 {
-	for(int x = 0; x < image->width(); x++)
+	for (int x = 0; x < image->width(); x++)
 	{
 		rgb_t p = image->get_pixel(x, y);
-		
+
 		if (is_black(p, 100))
-		{ 
+		{
 			return false;
 		}
 	}
@@ -140,9 +140,9 @@ static inline bitmap_image crop_to_image_size(bitmap_image image)
 static inline bool diff(const rgb_t& c0, const rgb_t& c1, const unsigned char threshold)
 {
 	bool r_a = (int)c0.red - (int)c1.red <= (int)threshold;
-	bool g_a = (int)c0.green- (int)c1.green <= (int)threshold;
-	bool b_a = (int)c0.blue-(int)c1.blue <= (int)threshold;
-	return (r_a  && g_a && b_a);
+	bool g_a = (int)c0.green - (int)c1.green <= (int)threshold;
+	bool b_a = (int)c0.blue - (int)c1.blue <= (int)threshold;
+	return (r_a && g_a && b_a);
 }
 
 static inline void high_pass(rgb_t* pixel, int thresshold)
@@ -268,8 +268,21 @@ static inline int height_from_margins(margins m)
 	return bottom - up;
 };
 
-static inline bitmap_image resize(bitmap_image& _bmp, int w, int h)
+static inline void resize(bitmap_image& _bmp, int w, int h, bitmap_image* result)
 {
-	_bmp.setwidth_height(w, h, true);
-	return _bmp;
+	result->setwidth_height(w, h, true);
+	std::cout << "x in bmp " << std::to_string(_bmp.width()) << "x out " << std::to_string(w) << std::endl;
+	std::cout << "y in bmp " << std::to_string(_bmp.height()) << "y out " << std::to_string(h) << std::endl;
+	float x_aps_ratio = (float)w / (float)_bmp.width() ;
+	float y_aps_ratio = (float)h/ (float)_bmp.height();
+
+	std::cout << "x aspect ratio "<< std::to_string(x_aps_ratio) << std::endl;
+	for (int x = 0; x < w; x++)
+	{
+		for (int y = 0; y < h; y++)
+		{
+			auto pix = _bmp.get_pixel(std::floor(x  / x_aps_ratio), std::floor(y / y_aps_ratio));
+			result->set_pixel(x, y, pix);
+		}
+	}
 };

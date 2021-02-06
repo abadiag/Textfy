@@ -19,8 +19,7 @@ namespace TextfyLibTest
 
         [TestMethod]
         public void WidthTest()
-        {
-            
+        {   
             var result = TextfyConsumer.Api.BitmapApi.get_bmp_width();
             Assert.AreEqual(ExpectedWidth, result);
         }

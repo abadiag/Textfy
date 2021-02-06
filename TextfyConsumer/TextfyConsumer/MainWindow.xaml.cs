@@ -38,11 +38,9 @@ namespace TextfyConsumer
         {
             InitializeComponent();
             Task.Run(() => CreateTemplates());
-
             ThresholdBar.Value = 0.0;
-            var diff = GetDifference(template_test_font, template_test_font, 10);
 
-            Console.WriteLine(diff);
+            //Api.BitmapApi.resize_bmp(a_1, path);
         }
 
         private async void DoProcesses()

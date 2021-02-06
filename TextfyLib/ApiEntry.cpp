@@ -15,10 +15,10 @@ TEXTFYLIB_API void open_bmp(const char* file_name)
 TEXTFYLIB_API void resize_bmp(const char* file_in, const char* file_out)
 {
 	std::cout << "file name " << file_in << std::endl;
-	bmp = new bitmap_image(file_in);
-
-	auto result = resize(*bmp, 100, 100);
-	result.save_image(file_out);
+	bitmap_image img(file_in);
+	bitmap_image img_resized(800, 600);
+	resize(img, 800, 600, &img_resized);
+	img_resized.save_image(file_out);
 }
 
 TEXTFYLIB_API void save_bmp(const char* file_name)
