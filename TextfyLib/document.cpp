@@ -92,8 +92,29 @@ void document::set_letters()
 			{
 				letters.push_back(line->letters[l_count]);
 			}
-
 		}
+	}
+}
+
+void document::export_document(string path)
+{
+#pragma warning(suppress : 4996)
+	mkdir(path.c_str());
+
+	int line_counter = 0;
+	for (auto line : lines)
+	{
+		line_counter++;
+
+		for (int l_count = 0; l_count < line->letters.size(); l_count++)
+		{
+			auto letter_a = line->letters[l_count];
+
+			auto p = path + "Result" + std::to_string(line_counter) + "_" + std::to_string(l_count) + letter_a->text + "_extract.bmp";
+			cout << "Export letter to " << path << endl;
+			letter_a->char_bmp.save_image(p);
+		}
+
 	}
 }
 
@@ -115,9 +136,10 @@ void document::set_text(vector<Letter*> _letters, int thresH)
 				result += "\n";
 				for (int l_count = 0; l_count < line->letters.size(); l_count++)
 				{
-					auto letter_a = line->letters[l_count]; 
+					auto letter_a = line->letters[l_count];
 					auto best = get_best_coincidence(letter_a, _letters, thresH);
 					result += best->text;
+					letter_a->text = best->text;
 				}
 			}
 		}
@@ -144,23 +166,23 @@ Letter* document::get_best_coincidence(Letter* l, std::vector<Letter*> _letters,
 	float r_temp = 0.0;
 	Letter* result = nullptr;
 
-	for(auto _letter : _letters)
+	for (auto _letter : _letters)
 	{
 		r = l->percentCoincidence(*_letter, threshold);
 
-		if (r > r_temp) 
+		if (r > r_temp)
 		{
 			r_temp = r;
 			result = _letter;
 		}
 	}
 
-	export_result(l, result, r);
+	//export_result(l, result, r);
 	//cout <<result->text << " "<< r << "%"<<endl;
 	return result;
 }
 
-void document::export_result(Letter *origin, Letter *match, float coincidence)
+void document::export_result(Letter* origin, Letter* match, float coincidence)
 {
 	string folder = "F:\\Repository\\Textfy\\Assets\\Results\\line" +
 		std::to_string(origin->line_owner) + "_position" +

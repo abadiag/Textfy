@@ -18,7 +18,7 @@ public:
 	vector<Letter*> get_letters();
 	void set_text(vector<Letter*> letters, int thresH);
 	void set_letters();
-	vector<Letter*>letters;
+	void export_document(string path);
 
 private:
 	void crop_document();
@@ -28,6 +28,7 @@ private:
 	Letter* get_best_coincidence(Letter* l, std::vector<Letter*> letters, int threshold);
 	void export_result(Letter* origin, Letter* match, float coincidence);
 
+	vector<Letter*>letters;
 	bitmap_image doc_bitmap;
 	std::vector<line*>lines;
 	int bitmap_with;
@@ -46,6 +47,5 @@ public:
 	};
 
 private:
-
 	std::vector<Letter>letters;
 };

@@ -25,7 +25,8 @@ static inline int height_from_margins(margins m);
 static inline bool is_white_line(bitmap_image* image, int y);
 static bitmap_image get_column_bmp(bitmap_image image, int x1, int x2);
 static bitmap_image get_row_bmp(bitmap_image image, int y1, int y2);
-//static inline bitmap_image resize(bitmap_image& _bmp, int w, int h, bitmap_image* result);
+
+static inline void get_folder_fr_path(char *filename, char *folder);
 
 static inline void high_contrast_apply(bitmap_image* bmp)
 {
@@ -275,7 +276,7 @@ static inline void resize(bitmap_image& _bmp, int w, int h, bitmap_image* result
 	float bmp_width = (float)_bmp.width();
 	float bmp_height = (float)_bmp.height();
 
-	try 
+	try
 	{
 		if (bmp_width == 0.0 || bmp_height == 0.0 || w == 0.0 || h == 0.0)
 		{
@@ -307,5 +308,16 @@ static inline void resize(bitmap_image& _bmp, int w, int h, bitmap_image* result
 		std::cout << e.what() << std::endl;
 		result->copy_from(_bmp);
 		return;
-	}
+	};
 };
+
+static inline void get_folder_fr_path(char* filename, const char* folder)
+{
+	std::string path(filename);
+
+	const size_t last_slash_idx = path.rfind('\\');
+	if (std::string::npos != last_slash_idx)
+	{
+		folder = path.substr(0, last_slash_idx).c_str();
+	}
+}

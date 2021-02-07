@@ -39,29 +39,10 @@ namespace TextfyConsumer
             InitializeComponent();
             Task.Run(() => CreateTemplates());
             ThresholdBar.Value = 0.0;
-
-            //Api.BitmapApi.resize_bmp(a_1, path);
-        }
-
-        private async void DoProcesses()
-        {
-            try
-            {
-                await Task.Run(() => CreateTemplates());
-                unsafe
-                {
-
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
         }
 
         private void CreateTemplates()
         {
-
             Api.BitmapApi.create_templates();
         }
 
@@ -78,7 +59,6 @@ namespace TextfyConsumer
 
         private void GetStream()
         {
-
             Api.BitmapApi.get_bmp_stream(out var b, out var result);
             Console.WriteLine(result);
         }
@@ -99,7 +79,6 @@ namespace TextfyConsumer
                 {
                     ImgBitmapView.Source = new BitmapImage(new Uri(file_1));
                 }
-
             }
         }
 
@@ -116,7 +95,7 @@ namespace TextfyConsumer
             }
         }
 
-        private void ThresholdBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+       private void ThresholdBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             barValue.Text = ThresholdBar.Value.ToString();
         }
@@ -143,4 +122,3 @@ namespace TextfyConsumer
         }
     }
 }
-
