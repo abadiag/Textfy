@@ -12,7 +12,7 @@ std::string document::get_text()
 void document::scan_document()
 {
 	//high_contrast();
-	crop_document();
+	//crop_document();
 	h_lines();
 	extract_lines();
 }
@@ -114,7 +114,6 @@ void document::export_document(string path)
 			cout << "Export letter to " << path << endl;
 			letter_a->char_bmp.save_image(p);
 		}
-
 	}
 }
 

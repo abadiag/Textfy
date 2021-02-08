@@ -1,25 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Runtime.InteropServices;
-using System.IO;
 using Microsoft.Win32;
 
 namespace TextfyConsumer
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Only quick visual tests pourposes MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -30,13 +19,18 @@ namespace TextfyConsumer
         private static string output_path = @"F:\Repository\Textfy\Assets\image_output_bmp.bmp";
         private static string text_image = @"F:\Repository\Textfy\Assets\text_image.bmp";
         private static string template_test_font = @"F:\Repository\Textfy\Assets\Fonts\Test\Test.bmp";
-
         private string file_1 = String.Empty;
         private string file_2 = String.Empty;
         private string file_to_analize = String.Empty;
+
         public MainWindow()
         {
             InitializeComponent();
+            Init();
+        }
+
+        private void Init() 
+        {
             Task.Run(() => CreateTemplates());
             ThresholdBar.Value = 0.0;
         }
@@ -46,10 +40,9 @@ namespace TextfyConsumer
             Api.BitmapApi.create_templates();
         }
 
-
         private string ProcessDocument(string path_to_analize)
         {
-            return Task.Run(()=>Api.BitmapApi.process_document(path_to_analize)).Result;
+            return Task.Run(() => Api.BitmapApi.process_document(path_to_analize)).Result;
         }
 
         private int GetDifference(string img1, string img2, int th)
@@ -95,7 +88,7 @@ namespace TextfyConsumer
             }
         }
 
-       private void ThresholdBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void ThresholdBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             barValue.Text = ThresholdBar.Value.ToString();
         }
