@@ -1,7 +1,7 @@
 # Textfy
 C++ lib image to text reader
 
-Use the dynamic .DLL lib from c#:
+Use of the dynamic .DLL lib from c#:
 
 create desired static extern methods with the same name in 'ApiEntry.h' following the next:
 (DllPath must be the location of the .DLL)
