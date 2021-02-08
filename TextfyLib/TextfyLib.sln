@@ -12,6 +12,41 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextfyConsumer", "..\Textfy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextfyLibTest", "..\TextfyLibTest\TextfyLibTest.csproj", "{63D1FB90-2932-46A1-AA60-4EAA7E3529CA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{C7D5094C-792F-4E92-8523-84C0F48DD82A}"
+	ProjectSection(SolutionItems) = preProject
+		..\Assets\Test\TextBMP.bmp = ..\Assets\Test\TextBMP.bmp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lines", "Lines", "{8EE5B495-E0E6-4488-A8C3-6229EED32DB7}"
+	ProjectSection(SolutionItems) = preProject
+		..\Assets\lines\line0.bmp = ..\Assets\lines\line0.bmp
+		..\Assets\lines\line1.bmp = ..\Assets\lines\line1.bmp
+		..\Assets\lines\line2.bmp = ..\Assets\lines\line2.bmp
+		..\Assets\lines\line3.bmp = ..\Assets\lines\line3.bmp
+		..\Assets\lines\line4.bmp = ..\Assets\lines\line4.bmp
+		..\Assets\lines\line5.bmp = ..\Assets\lines\line5.bmp
+		..\Assets\lines\line6.bmp = ..\Assets\lines\line6.bmp
+		..\Assets\lines\line7.bmp = ..\Assets\lines\line7.bmp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Letters", "Letters", "{66C040B5-0943-4DCC-A44A-67F4881723F8}"
+	ProjectSection(SolutionItems) = preProject
+		..\Assets\letters\letter0_0.bmp = ..\Assets\letters\letter0_0.bmp
+		..\Assets\letters\letter0_1.bmp = ..\Assets\letters\letter0_1.bmp
+		..\Assets\letters\letter0_2.bmp = ..\Assets\letters\letter0_2.bmp
+		..\Assets\letters\letter0_3.bmp = ..\Assets\letters\letter0_3.bmp
+		..\Assets\letters\letter0_4.bmp = ..\Assets\letters\letter0_4.bmp
+		..\Assets\letters\letter0_5.bmp = ..\Assets\letters\letter0_5.bmp
+		..\Assets\letters\letter0_6.bmp = ..\Assets\letters\letter0_6.bmp
+		..\Assets\letters\letter0_7.bmp = ..\Assets\letters\letter0_7.bmp
+		..\Assets\letters\letter1_0.bmp = ..\Assets\letters\letter1_0.bmp
+		..\Assets\letters\letter1_1.bmp = ..\Assets\letters\letter1_1.bmp
+		..\Assets\letters\letter1_2.bmp = ..\Assets\letters\letter1_2.bmp
+		..\Assets\letters\letter1_3.bmp = ..\Assets\letters\letter1_3.bmp
+		..\Assets\letters\letter1_4.bmp = ..\Assets\letters\letter1_4.bmp
+		..\Assets\letters\letter1_5.bmp = ..\Assets\letters\letter1_5.bmp
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +94,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8EE5B495-E0E6-4488-A8C3-6229EED32DB7} = {C7D5094C-792F-4E92-8523-84C0F48DD82A}
+		{66C040B5-0943-4DCC-A44A-67F4881723F8} = {C7D5094C-792F-4E92-8523-84C0F48DD82A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8FAC150E-43C8-4E4B-9A81-04D09F47A801}
