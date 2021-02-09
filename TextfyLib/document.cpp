@@ -74,6 +74,7 @@ void document::h_lines()
 void document::extract_lines()
 {
 	std::cout << "there are " << lines.size() << " lines in doc " << this->doc_bitmap.get_filename() << endl;
+
 	for (int li = 0; li < lines.size(); li++)
 	{
 		auto b = get_row_bmp(this->doc_bitmap, lines[li]->y1, lines[li]->y2);
@@ -92,27 +93,6 @@ void document::set_letters()
 			{
 				letters.push_back(line->letters[l_count]);
 			}
-		}
-	}
-}
-
-void document::export_document(string path)
-{
-#pragma warning(suppress : 4996)
-	mkdir(path.c_str());
-
-	int line_counter = 0;
-	for (auto line : lines)
-	{
-		line_counter++;
-
-		for (int l_count = 0; l_count < line->letters.size(); l_count++)
-		{
-			auto letter_a = line->letters[l_count];
-
-			auto p = path + "Result" + std::to_string(line_counter) + "_" + std::to_string(l_count) + letter_a->text + "_extract.bmp";
-			cout << "Export letter to " << path << endl;
-			letter_a->char_bmp.save_image(p);
 		}
 	}
 }
@@ -176,9 +156,28 @@ Letter* document::get_best_coincidence(Letter* l, std::vector<Letter*> _letters,
 		}
 	}
 
-	//export_result(l, result, r);
-	//cout <<result->text << " "<< r << "%"<<endl;
 	return result;
+}
+
+void document::export_document(string path)
+{
+#pragma warning(suppress : 4996)
+	mkdir(path.c_str());
+
+	int line_counter = 0;
+	for (auto line : lines)
+	{
+		line_counter++;
+
+		for (int l_count = 0; l_count < line->letters.size(); l_count++)
+		{
+			auto letter_a = line->letters[l_count];
+
+			auto p = path + "Result" + std::to_string(line_counter) + "_" + std::to_string(l_count) + letter_a->text + "_extract.bmp";
+			cout << "Export letter to " << path << endl;
+			letter_a->char_bmp.save_image(p);
+		}
+	}
 }
 
 void document::export_result(Letter* origin, Letter* match, float coincidence)

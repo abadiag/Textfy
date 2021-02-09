@@ -143,12 +143,10 @@ TEXTFYLIB_API SAFEARRAY* get_bmp_array()
 
 	//std::fill_n(dta.begin(), dta.size(), t);
 	//int size = dta.size();
-
 	//for (int i = 0; i < size; i++)
 	//{
 	//	vecBytes.push_back((unsigned char)i);
 	//}
-
 	//CreateSafeArray<byte, VT_UI1>((unsigned char*)(&(dta)[0]), dta.size(), pSafeArrayOfBytes);
 
 	return pSafeArrayOfBytes;
@@ -178,7 +176,7 @@ TEXTFYLIB_API void create_templates()
 	bitmap_image faunces_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Faunces\\Fraunces.bmp");
 	document faunces(faunces_bmp);
 
-	/*bitmap_image inconsolata_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\inconsolata.bmp");
+	bitmap_image inconsolata_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\inconsolata.bmp");
 	document inconsolata(inconsolata_bmp);
 
 	bitmap_image ptserif_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\PTSerif\\PTSerif.bmp");
@@ -188,39 +186,38 @@ TEXTFYLIB_API void create_templates()
 	document roboto(roboto_bmp);
 
 	bitmap_image ubuntu_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Ubuntu\\Ubuntu.bmp");
-	document ubuntu(ubuntu_bmp);*/
+	document ubuntu(ubuntu_bmp);
 
 	std::vector<document> docs;
 	docs.push_back(faunces);
-	//docs.push_back(inconsolata);
-	//docs.push_back(ptserif);
-	//docs.push_back(roboto);
-	//docs.push_back(ubuntu);
+	docs.push_back(inconsolata);
+	docs.push_back(ptserif);
+	docs.push_back(roboto);
+	docs.push_back(ubuntu);
 
 	std::vector <const char*> docs_path;
 	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Faunces\\Fraunces.txt");
-	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\Inconsolata.txt");
-	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\PTSerif\\PTSerif.txt");
-	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Roboto\\Roboto.txt");
-	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Ubuntu\\Ubuntu.txt");
+	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\Inconsolata.txt");
+	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\PTSerif\\PTSerif.txt");
+	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Roboto\\Roboto.txt");
+	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Ubuntu\\Ubuntu.txt");
 
 	templ_factory = new templates_factory(docs, docs_path);
 	templ_factory->process_documents();
-
 	cout << "Templates loaded" << endl;
 }
 
-TEXTFYLIB_API char* process_document(const char* file_name)
+TEXTFYLIB_API char* process_document(const char* file_name, int threshold)
 {
 	string text_result = "NO_RESULT";
 	cout << "Opening file: " << file_name << endl;
 	bitmap_image doc_img(file_name);
 	document doc(doc_img);
 	doc.scan_document();
-	doc.set_text(templ_factory->get_templates(), 2);
+	doc.set_text(templ_factory->get_templates(), threshold);
 	text_result = doc.get_text();
 	cout << "result from library " << "\n" << text_result << endl;
-	doc.export_document("F:\\Repository\\Textfy\\Assets\\Results\\Faunces\\");
+	//doc.export_document("F:\\Repository\\Textfy\\Assets\\Results\\Faunces\\");
 	return strcpy(new char[text_result.size()], text_result.c_str());
 
 }

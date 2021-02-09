@@ -75,7 +75,5 @@ void line::extract_columns()
 		letter->position_in_line = col_num;
 		letter->line_owner = this->line_position;
 		letters.push_back(letter);
-		//cout << "column " + std::to_string(col_num) + " x1:" << columns[col_num]->x1 << " x2:" << columns[col_num]->x2 << endl;
-		//b.save_image("F:\\Repository\\Textfy\\Assets\\letters\\letter" + std::to_string(col_num) +"_"+ std::to_string(line_position) + ".bmp");
 	}
 }

@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="0,0,521,0">
-        <Image x:Name="ImgBitmapView" HorizontalAlignment="Left" Height="100" Margin="30,100,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="1.886,0.555"/>
-        <Image x:Name="ImgBitmapView2" HorizontalAlignment="Left" Height="100" Margin="30,246,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button Content="Difference" HorizontalAlignment="Left" Margin="34,34,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.42,-0.198" PreviewMouseDown="Button_PreviewMouseDown"/>
-        <TextBox x:Name="ResultTextBox" HorizontalAlignment="Left" Height="23" Margin="10,377,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Load bmp A" HorizontalAlignment="Left" Margin="34,75,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Button Content="Load bmp B" HorizontalAlignment="Left" Margin="34,221,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-        <Slider x:Name="ThresholdBar" HorizontalAlignment="Left" Margin="77,226,-117,0" VerticalAlignment="Top" Height="28" Width="311" Maximum="255" RenderTransformOrigin="0.5,0.5" ValueChanged="ThresholdBar_ValueChanged">
+        <Image x:Name="ImgBitmapView" HorizontalAlignment="Left" Height="116" Margin="30,100,0,0" VerticalAlignment="Top" Width="123" RenderTransformOrigin="1.886,0.555"/>
+        <Image x:Name="ImgBitmapView2" HorizontalAlignment="Left" Height="110" Margin="30,262,0,0" VerticalAlignment="Top" Width="123"/>
+        <Button Content="Coincidence %" HorizontalAlignment="Left" Margin="13,11,0,0" VerticalAlignment="Top" Width="96" RenderTransformOrigin="-0.42,-0.198" PreviewMouseDown="DifferenceGetBtn" Height="44"/>
+        <TextBox x:Name="ResultTextBox" HorizontalAlignment="Left" Height="23" Margin="132,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="67"/>
+        <Button Content="Load bmp A" HorizontalAlignment="Left" Margin="13,60,0,0" VerticalAlignment="Top" Width="75" Click="Image1LoadBtn"/>
+        <Button Content="Load bmp B" HorizontalAlignment="Left" Margin="13,221,0,0" VerticalAlignment="Top" Width="75" Click="Image2LoadBtn"/>
+        <Slider x:Name="ThresholdBar" HorizontalAlignment="Left" Margin="77,226,-117,0" VerticalAlignment="Top" Height="28" Width="311" Maximum="255" RenderTransformOrigin="0.5,0.5" ValueChanged="ThresholdBar_ValueChanged" ToolTip="Threshold">
             <Slider.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -23,9 +23,9 @@
                 </TransformGroup>
             </Slider.RenderTransform>
         </Slider>
-        <TextBlock x:Name="barValue" HorizontalAlignment="Left" Margin="223,21,0,0" TextWrapping="Wrap" Text="Value" VerticalAlignment="Top" RenderTransformOrigin="-0.655,0.188" Height="48" Width="38"/>
-        <Button Content="Analize text" HorizontalAlignment="Left" Margin="304,34,-108,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
-        <TextBlock x:Name="TextResult_block" HorizontalAlignment="Left" Margin="304,75,-406,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="373" Height="258"/>
+        <TextBlock x:Name="barValue" HorizontalAlignment="Left" Margin="224,60,0,0" TextWrapping="Wrap" Text="Value" VerticalAlignment="Top" RenderTransformOrigin="-0.655,0.188" Height="16" Width="37"/>
+        <Button Content="Analize text" HorizontalAlignment="Left" Margin="304,11,-162,0" VerticalAlignment="Top" Width="129" Click="AnalizeDocBtn" Height="44"/>
 
+        <RichTextBox x:Name="TextResult_block" HorizontalAlignment="Left" Margin="304,75,-417,0" VerticalAlignment="Top" Width="384" Height="297"/>
     </Grid>
 </Window>

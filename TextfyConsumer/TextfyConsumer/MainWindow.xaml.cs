@@ -12,13 +12,6 @@ namespace TextfyConsumer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static string path = @"F:\Repository\Textfy\Assets\image_check_bmp.bmp";
-        private static string a_1 = @"F:\Repository\Textfy\Assets\A.bmp";
-        private static string a_2 = @"F:\Repository\Textfy\Assets\A2.bmp";
-        private static string d_1 = @"F:\Repository\Textfy\Assets\D2.bmp";
-        private static string output_path = @"F:\Repository\Textfy\Assets\image_output_bmp.bmp";
-        private static string text_image = @"F:\Repository\Textfy\Assets\text_image.bmp";
-        private static string template_test_font = @"F:\Repository\Textfy\Assets\Fonts\Test\Test.bmp";
         private string file_1 = String.Empty;
         private string file_2 = String.Empty;
         private string file_to_analize = String.Empty;
@@ -29,10 +22,12 @@ namespace TextfyConsumer
             Init();
         }
 
-        private void Init() 
+        #region Api functionality
+        private void Init()
         {
             Task.Run(() => CreateTemplates());
             ThresholdBar.Value = 0.0;
+            SetSafeBarValueText();
         }
 
         private void CreateTemplates()
@@ -40,9 +35,9 @@ namespace TextfyConsumer
             Api.BitmapApi.create_templates();
         }
 
-        private string ProcessDocument(string path_to_analize)
+        private string ProcessDocument(string path_to_analize, int th)
         {
-            return Task.Run(() => Api.BitmapApi.process_document(path_to_analize)).Result;
+            return Task.Run(() => Api.BitmapApi.process_document(path_to_analize, th)).Result;
         }
 
         private int GetDifference(string img1, string img2, int th)
@@ -54,64 +49,96 @@ namespace TextfyConsumer
         {
             Api.BitmapApi.get_bmp_stream(out var b, out var result);
             Console.WriteLine(result);
-        }
+        } 
+        #endregion
 
-        private void Button_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        #region Buttons actions Stuff
+        private void DifferenceGetBtn(object sender, MouseButtonEventArgs e)
         {
             int result = GetDifference(file_1, file_2, (int)ThresholdBar.Value);
-            ResultTextBox.Text = result + "%";
+            ResultTextBox.Text = (result + "%");
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Image1LoadBtn(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            if (fd.ShowDialog().HasValue)
-            {
-                file_1 = fd.FileName;
-                if (file_1.Contains(".bmp"))
-                {
-                    ImgBitmapView.Source = new BitmapImage(new Uri(file_1));
-                }
-            }
+            string file_img1 = GetFile(".bmp");
+            SetSafeImageView(ImgBitmapView, new BitmapImage(new Uri(file_img1)));
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Image2LoadBtn(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog fd = new OpenFileDialog();
-            if (fd.ShowDialog().HasValue)
-            {
-                file_2 = fd.FileName;
-                if (file_2.Contains(".bmp"))
-                {
-                    ImgBitmapView2.Source = new BitmapImage(new Uri(file_2));
-                }
-            }
+            string file_img2 = GetFile(".bmp");
+            SetSafeImageView(ImgBitmapView2, new BitmapImage(new Uri(file_img2)));
         }
 
         private void ThresholdBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            barValue.Text = ThresholdBar.Value.ToString();
+            SetSafeBarValueText();
+            e.Handled = true;
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void AnalizeDocBtn(object sender, RoutedEventArgs e)
         {
+            string _txt_result = "No result";
+            string _file = GetFile(".bmp");
+            _txt_result = string.IsNullOrEmpty(_file) ? _txt_result : ProcessDocument(_file, GetThresholdSafeValue());
+            SetSafeTextResult(TextResult_block, _txt_result);
+        } 
+        #endregion
+
+        #region Safe Thread access controls
+        private void SetSafeImageView(System.Windows.Controls.Image control, BitmapImage bmp)
+        {
+            control.Dispatcher.Invoke(new Action(() =>
+            {
+                control.Source = bmp;
+            }));
+        }
+
+        private void SetSafeTextResult(System.Windows.Controls.RichTextBox t_block, string text)
+        {
+            t_block.Dispatcher.Invoke(new Action(() =>
+            {
+                t_block.Document.Blocks.Clear();
+                t_block.Document.Blocks.Add(new System.Windows.Documents.Paragraph(new System.Windows.Documents.Run(text)));
+            }));
+        }
+
+        private void SetSafeBarValueText()
+        {
+            barValue.Dispatcher.Invoke(new Action(() => { barValue.Text = ThresholdBar.Value.ToString(); }));
+        }
+
+        private int GetThresholdSafeValue()
+        {
+            int value_ = 0;
+            ThresholdBar.Dispatcher.
+                Invoke(new Action(() =>
+               {
+                   _ = int.TryParse(ThresholdBar.Value.ToString(), out value_);
+               }));
+            return value_;
+        }
+        #endregion
+
+        #region Files manip
+        private string GetFile(string filter)
+        {
+            string f_ = String.Empty;
             OpenFileDialog fd = new OpenFileDialog();
             if (fd.ShowDialog().HasValue)
             {
-                file_to_analize = fd.FileName;
-                if (file_to_analize.Contains(".bmp"))
+                if (fd.FileName.Contains(filter))
                 {
-                    string txt_result = "No result";
-
-                    txt_result = ProcessDocument(file_to_analize);
-
-                    TextResult_block.Text = txt_result;
+                    f_ = fd.FileName;
                 }
                 else
                 {
                     MessageBox.Show("File not valid " + file_to_analize);
                 }
             }
-        }
+            return f_;
+        } 
+        #endregion
     }
 }

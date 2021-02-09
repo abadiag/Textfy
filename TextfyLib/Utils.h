@@ -114,7 +114,7 @@ static bitmap_image get_column_bmp(bitmap_image image, int x1, int x2)
 
 static inline bitmap_image crop_to_image_size(bitmap_image image)
 {
-	margins m = crop_to_edge(image, 100);
+	margins m = crop_to_edge(image, 140);
 	int w = width_from_margins(m);
 	int h = height_from_margins(m);
 	bitmap_image b(w, h);
@@ -189,8 +189,6 @@ static inline margins crop_to_edge(bitmap_image& img, int thresshold)
 	{
 		for (int y = 0; y < height; y++)
 		{
-
-
 			rgb_t pixel = img.get_pixel(x, y);
 
 			if (is_black(pixel, thresshold))

@@ -2,7 +2,6 @@
 #include "bitmap_image.hpp"
 #include "Utils.h"
 #include "CharacterBase.h"
-//#include "Letter.h"
 
 class line_column
 {
@@ -19,7 +18,6 @@ public:
 
 	void set_column_bmp(bitmap_image _bmp);
 	bitmap_image get_column_bmp();
-	//Letter _letter;
 
 private:
 	bitmap_image col_bmp;

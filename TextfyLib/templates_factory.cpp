@@ -3,7 +3,6 @@
 
 void templates_factory::process_documents()
 {
-
 	ifstream fin;
 	for (temp_factory_tupple* temp : f_templates_tupple)
 	{
@@ -59,17 +58,9 @@ void templates_factory::add_to_letters(vector<Letter*>_letters)
 
 void templates_factory::export_templates()
 {
-	
-
 	for(auto l : f_templates_tupple)
-	{
-		
-	}
-
-
+	{}
 #pragma warning(suppress : 4996)
 	//mkdir(folder.c_str());
-
 	//string file_origin_pth = folder + "\\letter.bmp";
-
 }

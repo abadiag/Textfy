@@ -48,4 +48,4 @@ extern "C" TEXTFYLIB_API int TestArrayOfStrings(char* ppStrArray[], int count);
 extern "C" TEXTFYLIB_API void SayHello();
 extern "C" TEXTFYLIB_API int get_coincidence(const char* file_name_a, const char* file_name_b, int threshold);
 extern "C" TEXTFYLIB_API void create_templates();
-extern "C" TEXTFYLIB_API char* process_document(const char* file_name_a);
+extern "C" TEXTFYLIB_API char* process_document(const char* file_name_a, int th);

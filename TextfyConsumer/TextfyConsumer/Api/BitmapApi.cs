@@ -76,7 +76,7 @@ namespace TextfyConsumer.Api
         public static extern int get_coincidence(string file_name_a, string file_name_b, int threshold);
 
         [Pure, DllImport(DllPath, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern string process_document(string file_name);
+        public static extern string process_document(string file_name, int threshold);
 
         [Pure, DllImport(DllPath, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void create_templates();

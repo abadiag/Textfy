@@ -7,8 +7,6 @@
 #include "line.h"
 #include "BmpColors.h"
 
-
-
 class document
 {
 public:
