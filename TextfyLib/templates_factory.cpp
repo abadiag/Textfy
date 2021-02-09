@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "templates_factory.h"
+#include <codecvt>
+#include <fcntl.h>
+#include <io.h>
 
 void templates_factory::process_documents()
 {
@@ -7,6 +10,10 @@ void templates_factory::process_documents()
 	for (temp_factory_tupple* temp : f_templates_tupple)
 	{
 		fin.open(temp->path_temp, ios::in);
+#pragma warning(suppress : 4996)
+		std::wbuffer_convert<std::codecvt_utf8<wchar_t>> conv(fin.rdbuf());
+		std::wistream wf(&conv);
+
 		temp->doc.scan_document();
 		temp->doc.set_letters();
 		cout << std::to_string(temp->doc.get_letters().size()) << endl;
@@ -16,11 +23,12 @@ void templates_factory::process_documents()
 		{
 			try
 			{
-				char c;
-				fin.get(c);
+				wchar_t c;
+				wf.get(c);
 				string s;
 				s.push_back(c);
 				doc_letters[l_count]->text = s;
+				cout << s << endl;
 				//export_templ(doc_letters[l_count], temp->path_temp, s);
 			}
 			catch (std::exception e)

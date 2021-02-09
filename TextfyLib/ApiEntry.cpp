@@ -176,31 +176,31 @@ TEXTFYLIB_API void create_templates()
 	bitmap_image faunces_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Faunces\\Fraunces.bmp");
 	document faunces(faunces_bmp);
 
-	bitmap_image inconsolata_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\inconsolata.bmp");
-	document inconsolata(inconsolata_bmp);
+	//bitmap_image inconsolata_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\inconsolata.bmp");
+	//document inconsolata(inconsolata_bmp);
 
-	bitmap_image ptserif_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\PTSerif\\PTSerif.bmp");
-	document ptserif(ptserif_bmp);
+	//bitmap_image ptserif_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\PTSerif\\PTSerif.bmp");
+	//document ptserif(ptserif_bmp);
 
-	bitmap_image roboto_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Roboto\\Roboto.bmp");
-	document roboto(roboto_bmp);
+	//bitmap_image roboto_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Roboto\\Roboto.bmp");
+	//document roboto(roboto_bmp);
 
-	bitmap_image ubuntu_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Ubuntu\\Ubuntu.bmp");
-	document ubuntu(ubuntu_bmp);
+	//bitmap_image ubuntu_bmp("F:\\Repository\\Textfy\\Assets\\Fonts\\Ubuntu\\Ubuntu.bmp");
+	//document ubuntu(ubuntu_bmp);
 
 	std::vector<document> docs;
 	docs.push_back(faunces);
-	docs.push_back(inconsolata);
-	docs.push_back(ptserif);
-	docs.push_back(roboto);
-	docs.push_back(ubuntu);
+	//docs.push_back(inconsolata);
+	//docs.push_back(ptserif);
+	//docs.push_back(roboto);
+	//docs.push_back(ubuntu);
 
 	std::vector <const char*> docs_path;
 	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Faunces\\Fraunces.txt");
-	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\Inconsolata.txt");
-	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\PTSerif\\PTSerif.txt");
-	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Roboto\\Roboto.txt");
-	docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Ubuntu\\Ubuntu.txt");
+	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Inconsolata\\Inconsolata.txt");
+	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\PTSerif\\PTSerif.txt");
+	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Roboto\\Roboto.txt");
+	//docs_path.push_back("F:\\Repository\\Textfy\\Assets\\Fonts\\Ubuntu\\Ubuntu.txt");
 
 	templ_factory = new templates_factory(docs, docs_path);
 	templ_factory->process_documents();
